@@ -1,0 +1,34 @@
+User Details
+-id
+-first name
+-last name
+-age
+-gender
+-blood group
+-mobile no
+-address
+
+Need Blood
+-id
+-full name (first name + last name)
+-blood group
+-mobile no
+-address
+
+Blood Activity
+-id
+-time
+
+Blood Request
+-id
+-name
+-mobile no
+-blood group
+-need
+
+Admin
+-username
+-password
+-name
+
+
