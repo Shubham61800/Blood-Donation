@@ -1,15 +1,43 @@
+<?php include 'components/navbar.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blood Donation Management System</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <style>
+        body{
+            width: 100%;
+        }
+        .section1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            text-align: center;
+            height: 30rem;
+            background-image: url("https://www.livemint.com/lm-img/img/2023/06/13/600x338/Blood_Donation_1686691682853_1686691683079.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: var(--blue);
+            background-blend-mode: soft-light;
+        }
+        .section1 h1{
+            font-size: 3rem;
+            color: white;
+        }
+        .details{
+            padding: 1rem 5rem;
+        }
+        .details h1{
+            margin-top: 2rem;
+        }
+    </style>
 </head>
 <body>
-    <?php include 'components/navbar.php'; ?>
     <div class="section1">
         <h1>A single drop of your blood could be <br> a drop of life for someone else.</h1>
     </div>
@@ -63,6 +91,7 @@
             Nobis excepturi fuga perferendis amet suscipit quae saepe hic quo odio ullam distinctio, nostrum nemo autem
             fugit modi nesciunt, repellat ipsum earum.</p>
     </div>
+    
 </body>
 
 </html>

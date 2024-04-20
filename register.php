@@ -1,3 +1,19 @@
+<?php
+    $alert="";
+    if($_SERVER["REQUEST_METHOD"]=="POST"){
+        $user = $_POST['username'];
+        $user_pass = $_POST['pass'];
+        $cpass=$_POST['cpass'];
+        if($user_pass==$cpass){
+          include 'dbcon.php';
+          $sql = "INSERT INTO `users` (`username`,`password`) VALUES ('$user','$user_pass')";
+          $result=mysqli_query($con,$sql);
+          header ('location : index.php');
+          session_start();
+          $_SESSION['username']=$user;
+        }
+    } 
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,7 +39,7 @@
         box-sizing: border-box;
       }
       body {
-        background: url("images/image1.jpg");
+        /* background: url("images/image1.jpg"); */
         background-repeat: no-repeat;
         background-size: cover;
       }
@@ -63,20 +79,28 @@
         font-weight: 600;
         cursor: pointer;
       }
+      .alert{
+        font-size: 1rem;
+        color: lightcoral;
+      }
     </style>
   </head>
 
   <body>
     <div class="container">
       <div class="form-input">
-        <h1>Login</h1>
-        <form action="login.php" method="post">
+        <h1>Register Now</h1>
+        <form action="register.php" method="POST">
           <label for="name">Username</label><br />
           <input type="text" name="username" required /><br />
           <label for="password">Password</label> <br />
           <input type="password" required name="pass" id="" /><br />
+          <label for="password">Confirm Password</label> <br />
+          <input type="password" required name="cpass" id="" /><br />
+          <p class="alert"><?php if(isset($alert)){echo $alert;} ?></p>
           <button type="submit">Login</button>
         </form>
+        <a href="login.php">Already have account? Login Now</a>
       </div>
     </div>
   </body>

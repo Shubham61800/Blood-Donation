@@ -1,5 +1,5 @@
 User Details
--id
+-user_id
 -first name
 -last name
 -age
@@ -8,27 +8,26 @@ User Details
 -mobile no
 -address
 
-Need Blood
--id
--full name (first name + last name)
--blood group
--mobile no
--address
-
 Blood Activity
--id
+-user_id
+-username
 -time
+-donation_activity(1 upcoming 2 completed)
 
 Blood Request
--id
+-user_id
 -name
 -mobile no
 -blood group
 -need
+-status (1 queued 2 accepted 3 rejected)
+
+User
+-user_id
+-username
+-password
 
 Admin
 -username
 -password
 -name
-
-

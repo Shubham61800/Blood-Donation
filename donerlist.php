@@ -96,6 +96,11 @@
             font-size: 1rem;
             border: 1px solid black;
         }
+        #req{
+            border: 2px solid var(--blue);
+            border-radius: 10px;
+            padding: 10px;
+        }
     </style>
 </head>
 
@@ -119,6 +124,7 @@
             </select>
             <button id="apply" type="submit">Get</button>
         </form>
+        <a  id="req" href="donorRequest.php">Become A donor</a>
     </div>
 
     <div class="list-donor">
@@ -126,9 +132,9 @@
             <?php
             $check = $_GET['blood_grp'];
             if ($check == "all") {
-                $sql = "SELECT * FROM `user`";
+                $sql = "SELECT * FROM `donors`";
             } else {
-                $sql = "SELECT * FROM `user` WHERE `blood_grp`='$check'";
+                $sql = "SELECT * FROM `donors` WHERE `blood_grp`='$check'";
             }
             $result = mysqli_query($con, $sql);
             $num = mysqli_num_rows($result);
@@ -144,21 +150,6 @@
             <td>" . $row['blood_grp'] . "</td>
             <td>" . $row['mobile_no'] . "</td></tr>";
                 $i++;
-
-                //     echo '<div class="card">
-                //             <div class="bldgrp">' . $row['blood_grp'] . '</div>
-                //             <div class="container-card">
-                //             <img src="" alt="">
-                //             <div class="">
-                //                 <h2>' . $row['first_name'] . ' ' . $row['last_name'] . '</h2>
-                //                 <h3>' . $row['mobile_no'] . '</h3>
-                //                 <form method="post" action="setreq.php">
-                //                 <button type="submit" id="reqbtn">Request</button>
-                //                 </form>
-                //             </div>
-                // </div>
-                // </div>';
-            
             }
             ?>
         </table>

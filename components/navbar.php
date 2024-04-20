@@ -34,10 +34,7 @@
             justify-content: space-between;
             align-items: center;
             background-color: white;
-            width: 100vw;
-            position: fixed;
-            top:0;
-            left: 0;
+            filter: drop-shadow(0px 0px 4px var(--black));
         }
 
         .left h2 {
@@ -50,35 +47,25 @@
             list-style: none;
             gap: 2rem;
             align-items: center;
-            transition: all ease-in;
+            transition: all ease-in 2s;
         }
+        
 
         .list a:hover {
             color: var(--blue);
             border-bottom: 1px solid var(--blue);
         }
 
-        .list button {
+        .list :nth-child(4) a{
             padding: 10px 20px;
             font-size: 1rem;
-            color: white;
             border: 0;
             border-radius: 5px;
             background-color: var(--blue);
+            color: white;
         }
-
-        .section1 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            text-align: center;
-            height: 30rem;
-            background-image: url("https://www.livemint.com/lm-img/img/2023/06/13/600x338/Blood_Donation_1686691682853_1686691683079.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-color: var(--blue);
-            background-blend-mode: soft-light;
+        .list :nth-child(4) :hover{
+            color: white;
         }
     </style>
 </head>
@@ -92,8 +79,8 @@
             <div class="list">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="donerlist.php?blood_grp=all">List of Donor's</a></li>
-                <li><a href="hello">Request Blood</a></li>
-                <li><button type="submit">My Profile</button></li>
+                <li><a href="reqblood.php">Request Blood</a></li>
+                <li><a href="login.php">My Profile</a></li>
             </div>
         </div>
     </nav>
