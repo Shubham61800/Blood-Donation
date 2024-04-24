@@ -27,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       --black: #31393cff;
       --blue: #2176ffff;
     }
-
     * {
       margin: 0;
       font-family: "Poppins", sans-serif;
