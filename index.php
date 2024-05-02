@@ -1,3 +1,5 @@
+<?php include 'components/navbar.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,22 +8,165 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blood Donation Management System</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <style>
+        body {
+            width: 100%;
+        }
+
+        .section1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            text-align: center;
+            height: 30rem;
+            background-image: url("https://www.livemint.com/lm-img/img/2023/06/13/600x338/Blood_Donation_1686691682853_1686691683079.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: var(--blue);
+            background-blend-mode: soft-light;
+        }
+
+        .section1 h1 {
+            font-size: 3rem;
+            color: white;
+            margin-top: 3rem;
+        }
+
+        .details {
+            padding: 1rem 5rem;
+        }
+
+        .details h1 {
+            margin-top: 5rem;
+            color: var(--blue);
+        }
+
+        img {
+            float: right;
+            height: 14rem;
+            margin-left: 1rem;
+            border-radius: 1rem;
+        }
+        .section2{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            gap: 1rem;
+            padding: 1rem 5rem;
+        }
+        .sm-container{
+            padding: 1.5rem;
+            border: 1px solid Black;
+            border-radius: 1rem;
+        }
+        .bld-grp{
+            float: none;
+            border-radius: 1rem;
+            padding: 1rem 0rem;
+            width: 50%;
+            margin: auto auto;
+        }
+        footer{
+            width: 100%;
+            margin-top: 2rem;
+            height: 4rem;
+            text-align: center;
+            justify-content: center;
+            background-color: var(--blue);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #grps{
+            float: none;
+            height: fit-content;
+        }
+    </style>
 </head>
 
 <body>
-    <?php include 'components/navbar.php'; ?>
     <div class="section1">
         <h1>A single drop of your blood could be <br> a drop of life for someone else.</h1>
     </div>
     <div class="details">
         <h1>Our Mision</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quia nulla praesentium voluptatem, aut optio unde fugit inventore, rem, atque tenetur voluptas dolores molestiae reprehenderit alias! Magnam totam aliquid amet ipsam, ipsa assumenda? Quod perferendis quae nihil enim eum ut provident error placeat repellat quaerat, dolorem praesentium blanditiis porro culpa. Similique id perspiciatis ratione quidem rerum itaque illo, commodi sed fugiat dolorum deleniti? Excepturi accusantium nemo incidunt, sit at, sint et quaerat deleniti quisquam deserunt dignissimos officia doloribus, ipsum maxime nisi vitae iusto placeat! Quos iste doloribus aliquid. Laboriosam perferendis omnis accusamus possimus voluptatum consectetur dicta incidunt ducimus impedit velit repellendus odio reiciendis porro sequi, aut, veniam blanditiis aliquam. Enim quam inventore odit perspiciatis explicabo sed quasi quae ipsum fuga distinctio facilis, delectus veniam at ipsa eveniet consectetur nihil rerum? Architecto hic, veniam natus voluptatem aliquid accusamus sint laboriosam! Delectus ipsa minima assumenda commodi ab exercitationem quaerat doloremque pariatur esse harum at maxime debitis dicta nemo odit, rem dolore blanditiis. Ratione magni ad commodi? Earum voluptatibus sapiente nam, similique facilis voluptas sint neque voluptatum culpa expedita fuga, velit libero sed numquam dolore optio, eaque esse? Suscipit voluptas tempora ad quia eum eos quisquam explicabo, consequuntur quas dicta doloribus vitae dolor.</p>
+        <p>
+            Our mission is simple yet profound: to save lives through the gift of blood donation. We believe that every
+            drop of blood donated has the power to make a difference, to bring hope, and to sustain life. By encouraging
+            more people to donate blood, we aim to ensure that hospitals and medical centers always have an adequate
+            supply of blood for those in need. Through our efforts, we strive to create a community of donors who
+            understand the critical importance of their contribution and the immense impact it has on individuals,
+            families, and entire communities. Join us in this noble mission, and together, let's make a lifesaving
+            difference.</p>
         <h1>Why Blood Donation</h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis cum ad est pariatur in velit eveniet nobis qui itaque facere adipisci culpa, animi deleniti quos doloribus magnam sit, explicabo cumque vel quod fuga sint veritatis id. Quis vero cum quod fugit mollitia alias ratione quam. Atque illo consequatur porro perferendis. Consectetur saepe dolorem mollitia cumque accusantium molestiae asperiores earum laboriosam, explicabo, quibusdam illum a repellendus fuga consequuntur minus eius, ex fugit? Error commodi ipsa veniam, ea reprehenderit reiciendis quae qui natus accusantium rerum in eaque dolorem, ad earum asperiores sunt tenetur saepe autem voluptates assumenda. Sint veritatis vero non iusto, quidem reiciendis delectus architecto atque voluptatibus recusandae nisi nam earum, perspiciatis, corrupti tempora provident fugiat nihil laborum voluptate tenetur autem aspernatur eum quos maiores. Nihil quis et soluta, quia tempore veniam non quaerat adipisci laborum, pariatur eveniet iste, praesentium labore? Corrupti, magni dicta reprehenderit accusantium eos quisquam enim tenetur dolorum, alias laborum nesciunt ipsum suscipit aliquid provident quidem doloremque, esse pariatur impedit ab cumque? Iusto officia ipsum dolore veritatis, accusamus similique officiis quaerat sunt fuga recusandae perspiciatis a quos, excepturi pariatur repellendus ea ex non perferendis aperiam hic accusantium numquam. Rerum quae quo et corporis aliquam nesciunt quasi vel similique?</p>
+        <img src="images/image2.jpg" alt="">
+        <p>
+            Blood donation is crucial for several reasons. Firstly, donated blood saves lives in emergencies such as
+            accidents, surgeries, and childbirth complications, where quick access to blood can be life-saving.
+            Additionally, blood transfusions are vital for patients with various medical conditions like cancer, blood
+            disorders, and chronic illnesses, helping them to recover and improve their quality of life. Regular blood
+            donations also ensure that blood banks maintain an adequate supply of all blood types, reducing the risk of
+            shortages during times of high demand. By donating blood, individuals directly contribute to the well-being
+            of others in their community, embodying the spirit of compassion and solidarity.</p>
+
         <h1>Need of Blood Donation</h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit ratione temporibus nulla eligendi a, aperiam, dolores accusamus tenetur odit consectetur voluptatibus saepe ipsam, velit obcaecati reiciendis suscipit ullam doloribus ducimus architecto ad quasi dicta nisi consequuntur? Facere repellat asperiores molestiae doloremque quisquam sint magnam eius sed natus cumque totam possimus dolore quam at blanditiis et officiis quo, voluptatem rerum praesentium minus! Exercitationem ullam eaque aliquid nihil aperiam magnam nobis placeat ut nostrum amet eos qui, architecto blanditiis officiis, a voluptatibus reprehenderit! Sequi quae placeat perferendis et, earum autem dignissimos vel praesentium velit eaque temporibus illum excepturi? Autem quisquam explicabo magnam ducimus excepturi dolorum! Necessitatibus numquam culpa illo quisquam soluta possimus sint magni. Obcaecati aliquam quia repellat ducimus possimus provident, esse assumenda corporis, fugit voluptatum quas ullam nobis. Minima alias deleniti porro illum excepturi voluptatum ratione, officia, autem hic quam eum. Molestiae, vitae provident. Voluptatibus voluptatem molestiae laboriosam dolore saepe? Nulla ipsum eligendi voluptate neque ab quae eaque debitis inventore vero temporibus, nemo, corporis tenetur aperiam! Minus quisquam ex, et impedit, odio illum eligendi nesciunt nihil repudiandae maxime accusantium! Nobis excepturi fuga perferendis amet suscipit quae saepe hic quo odio ullam distinctio, nostrum nemo autem fugit modi nesciunt, repellat ipsum earum.</p>
+        <img src="images/image 3.jpg" alt="">
+        <p>Blood donation meets critical needs in healthcare by providing a safe and stable supply of blood for
+            transfusions. This is vital for various medical treatments, including surgeries, cancer therapy, and
+            treatment of blood disorders. Blood donation also helps in emergencies like accidents and natural disasters
+            where there is an urgent need for blood. Additionally, regular blood donation plays a key role in
+            maintaining a sufficient blood supply, reducing the risk of shortages and ensuring that patients receive the
+            care they need. Overall, blood donation is essential for saving lives and improving health outcomes for
+            countless individuals.</p>
+        <h1>All about Blood?</h1>
     </div>
+
+    <div class="section2">
+        <div class="sm-container">
+            <h2>What is Blood?</h2>
+            <p>Blood is a vital fluid that circulates through our bodies, delivering essential nutrients and oxygen
+                to cells while removing waste products. It consists of several components, including red blood
+                cells, white blood cells, platelets, and plasma, each serving a unique function in maintaining our
+                health.</p>
+        </div>
+        <div class="sm-container">
+            <h2>How is Blood Collected?</h2>
+            <p>Blood donation is a safe and straightforward process that typically takes less than an hour. A
+                trained healthcare professional will clean an area on your arm and insert a sterile needle to draw
+                blood into a sealed bag. After donation, you'll rest briefly and enjoy refreshments before resuming
+                your day.</p>
+        </div>
+        <div class="sm-container">
+            <h2>Who Can Donate Blood?</h2>
+            <p>Most healthy adults between the ages of 18 and 65 are eligible to donate blood. Donors must weigh at
+                least 110 pounds and pass a brief medical screening to ensure their safety and the safety of the
+                blood supply.</p>
+        </div>
+        <div class="sm-container">
+            <h2>Where Can You Donate?</h2>
+            <p>Blood donation can take place at various locations, including blood donation centers, hospitals, and
+                mobile blood drives. Many communities host regular blood drives, making it convenient to donate.</p>
+        </div>
+        <div class="sm-container">
+            <h2>Why Donate Blood?</h2>
+            <p>Your blood donation can save lives. Whether it's helping someone undergoing surgery, receiving cancer
+                treatment, or recovering from an accident, your gift of blood is a gift of life.</p>
+        </div>
+        <div class="sm-container">
+            <h2>Be a Hero, Donate Blood Today</h2>
+            <p>Join us in our mission to ensure a stable blood supply for those in need. Your donation can make a
+                significant difference in someone's life. Schedule your donation appointment today and be a hero to
+                those in need.</p>
+        </div>
+        
+    </div>
+    <div class="bld-grp"><img src="images/image 5.jpg" alt="" id="grps"></div>
+    
+<footer>Copyright @ 2024 Blood Donation Management System</footer>
+
+
 </body>
 
 </html>
