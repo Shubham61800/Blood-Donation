@@ -1,14 +1,12 @@
 <?php
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         include 'dbcon.php';
-        $fname=$_POST['first_name'];
-        $lname=$_POST['last_name'];
-        $gender=$_POST['gender'];
+        session_start();
+        $email=$_SESSION['email'];
         $bldgrp=$_POST['blood_grp'];
-        $mno=$_POST['mobile_no'];
-        $address=$_POST['address'];
-        $message=$_POST['mes'];
-        $sql="INSERT INTO `blood_request` (`user_id`, `first_name`, `last_name`, `gender`, `blood_grp`, `mobile_no`, `address`, `mes`, `status`, `req_date`) VALUES ('$user_id', '$fname', '$lname', '$gender', '$bldgrp', '$mno', '$address', '$message', '1', current_timestamp());";
+        $mes=$_POST['mes'];
+        $current_date=date("Y/m/d");
+        $sql="INSERT INTO `blood_request` (`req_email`, `blood_grp`, `mes`, `status`,`req_date`) VALUES ('$email', '$bldgrp', '$mes', '1', '$current_date');";
         mysqli_query($con,$sql);
     }
 ?>
@@ -65,17 +63,31 @@
             row-gap: 16px;
             align-items: center;
         }
+        select{
+            width: 14rem;
+            padding:1rem;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
     <h1>Reqeust Blood</h1>
     <form action="reqblood.php" method="post">
-        <label for="fname">First Name</label><input placeholder="Enter Your First Name" type="text" name="first_name" id="fname"  required>
+        <!-- <label for="fname">First Name</label><input placeholder="Enter Your First Name" type="text" name="first_name" id="fname"  required>
         <label for="lname">Last Name</label><input placeholder="Enter Your Last Name"type="text" name="last_name" id="lname" required>
-        <label for="gender">Gender</label><input placeholder="Select Gender" type="text" name="gender" id="gender" required>
-        <label for="blood_grp">Blood Group</label><input placeholder="Select Blood Group"type="text" name="blood_grp" id="blood_grp" required>
-        <label for="mobile_no">Mobile No.</label><input type="text" placeholder="Enter Mobile Number" name="mobile_no" id="mobile_no" required>
-        <label for="address">Address</label><input type="text" placeholder="Enter Address" name="address" id="address" required>
+        <label for="gender">Gender</label><input placeholder="Select Gender" type="text" name="gender" id="gender" required> -->
+        <label for="blood_grp">Blood Group</label><select name="blood_grp" id="">
+        <option value="A-">A-</option>
+                <option value="A+">A+</option>
+                <option value="B-">B-</option>
+                <option value="B+">B+</option>
+                <option value="AB-">AB-</option>
+                <option value="AB+">AB+</option>
+                <option value="O-">O-</option>
+                <option value="O+">O+</option>
+            </select>
+        <!-- <label for="mobile_no">Mobile No.</label><input type="text" placeholder="Enter Mobile Number" name="mobile_no" id="mobile_no" required>
+        <label for="address">Address</label><input type="text" placeholder="Enter Address" name="address" id="address" required> -->
         <label for="mes">Why Need Blood</label><textarea  placeholder="Why you need blood?"name="mes" id="mes"></textarea>
         <button type="submit" id="submit">Send Reqeust</button></div>
     </form>

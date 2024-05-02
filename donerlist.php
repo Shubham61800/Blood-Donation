@@ -1,9 +1,9 @@
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donor's List</title>
+    <link rel="shortcut icon" href="blood.png" type="image/x-icon">
     <style>
         :root {
             --black: #31393cff;
@@ -52,11 +52,6 @@
             left: 1rem;
         }
 
-        .list-donor {
-            padding: 2rem 5rem;
-            width: 100%;
-        }
-
         table {
             width: 100%;
         }
@@ -96,10 +91,25 @@
             font-size: 1rem;
             border: 1px solid black;
         }
-        #req{
+
+        #req {
             border: 2px solid var(--blue);
             border-radius: 10px;
             padding: 10px;
+        }
+
+        .list-donor {
+            margin: 2rem 5rem;
+            border-radius: 1rem;
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            column-gap: 0;
+        }
+
+        .list-donor p {
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
         }
     </style>
 </head>
@@ -121,38 +131,46 @@
                 <option value="A+">A+</option>
                 <option value="B-">B-</option>
                 <option value="B+">B+</option>
+                <option value="AB-">AB-</option>
+                <option value="AB+">AB+</option>
+                <option value="O-">O-</option>
+                <option value="O+">O+</option>
             </select>
             <button id="apply" type="submit">Get</button>
         </form>
-        <a  id="req" href="donorRequest.php">Become A donor</a>
+        <?php
+        $logedin = $_SESSION['logedin'];
+        if (!isset($logedin)) {
+            echo `<a  id="req" href="register.php">Become A donor</a>`;
+        }
+        ?>
     </div>
 
     <div class="list-donor">
-        <table>
-            <?php
-            $check = $_GET['blood_grp'];
-            if ($check == "all") {
-                $sql = "SELECT * FROM `donors`";
-            } else {
-                $sql = "SELECT * FROM `donors` WHERE `blood_grp`='$check'";
-            }
-            $result = mysqli_query($con, $sql);
-            $num = mysqli_num_rows($result);
-            echo '<tr><th>Sr.</th>
-        <th>Name</th>
-        <th>Blood Group</th>
-        <th>Mobile No.</th></tr>';
-            $i = 1;
-            while ($row = mysqli_fetch_assoc($result)) {
-                $name = $row['first_name'] . ' ' . $row['last_name'];
-                echo "<td>$i</td>
-            <td>" . $name . "</td>
-            <td>" . $row['blood_grp'] . "</td>
-            <td>" . $row['mobile_no'] . "</td></tr>";
-                $i++;
-            }
-            ?>
-        </table>
+        <?php
+        $check = $_GET['blood_grp'];
+        if ($check == "all") {
+            $sql = "SELECT * FROM `donors`";
+        } else {
+            $sql = "SELECT * FROM `donors` WHERE `blood_grp`='$check'";
+        }
+        $result = mysqli_query($con, $sql);
+        $num = mysqli_num_rows($result);
+
+        echo '<p>Sr</p>
+            <p>Name</p>
+            <p>Blood Group</p>
+            <p>Mobile No</p>';
+        $i = 1;
+        while ($row = mysqli_fetch_assoc($result)) {
+            $name = $row['first_name'] . ' ' . $row['last_name'];
+            echo "<p>$i</p>
+            <p>" . $name . "</p>
+            <p>" . $row['blood_grp'] . "</p>
+            <p>" . $row['mobile_no'] . "</p></tr>";
+            $i++;
+        }
+        ?>
     </div>
 
 </body>

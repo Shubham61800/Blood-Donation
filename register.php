@@ -1,16 +1,27 @@
 <?php
+include 'dbcon.php';
 $alert = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $user = $_POST['username'];
-  $user_pass = $_POST['pass'];
-  $cpass = $_POST['cpass'];
-  if ($user_pass == $cpass) {
-    include 'dbcon.php';
-    $sql = "INSERT INTO `users` (`username`,`password`) VALUES ('$user','$user_pass')";
+  $fname = $_POST['fname'];
+  $lname = $_POST['lname'];
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $age = $_POST['age'];
+  $bldgrp = $_POST['blood_grp'];
+  $mobile = $_POST['mobile-no'];
+  $gender = $_POST['gender'];
+  $address = $_POST['address'];
+  $sql = "SELECT * FROM `users` WHERE `user_email`='$email'";
+  $result = mysqli_query($con, $sql);
+  if (mysqli_num_rows($result) == 0) {
+    $sql = "INSERT INTO `users` (`user_email`,`user_pass`) VALUES ('$email','$password')";
     $result = mysqli_query($con, $sql);
-    header('location : index.php');
+    $sql = "INSERT INTO `donors` (`donor_email`, `first_name`, `last_name`, `age`, `gender`, `blood_grp`, `mobile_no`, `address`, `donor_status`) VALUES ('$email', '$fname', '$lname', '$age', '$gender', '$bldgrp', '$mobile', '$address', '1')";
+    mysqli_query($con,$sql);
     session_start();
-    $_SESSION['username'] = $user;
+    $_SESSION['logedin'] = true;
+    $_SESSION['email']=$email;
+    echo "<script type='text/javascript'>window.top.location='http://localhost/Blood%20Donation/';</script>";
   }
 }
 ?>
@@ -19,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
   <meta charset="UTF-8" />
+  <link rel="shortcut icon" href="blood.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
   <!-- <link rel="stylesheet" href="css/login.css" /> -->
@@ -56,11 +68,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     .form-input {
       align-self: center;
       padding: 6px;
-      width: 24rem;
+      width: 26rem;
     }
 
     input {
-      padding: 8px;
+      padding: 12px;
       width: 100%;
       border-radius: 8px;
       font-size: 1rem;
@@ -87,14 +99,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     select {
-      padding: 8px;
+      padding: 12px;
       font-size: 1rem;
       border-radius: 10px;
-      width: 11rem;
+      width: 12rem;
     }
-    .grp{
+
+    .grp {
       display: flex;
       justify-content: space-between;
+      gap: 1rem;
     }
 
     .alert {
@@ -109,19 +123,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="form-input">
       <h1>Register Now</h1>
       <form action="register.php" method="POST">
-        <label for="name">Full Name</label><br />
-        <input type="text" name="name" required /><br />
+        <div class="grp">
+          <div class="grp5">
+            <label for="fname">First Name</label><br />
+            <input type="text" name="fname" required /><br />
+          </div>
+          <div class="grp6">
+            <label for="lname">Last Name</label><br />
+            <input type="text" name="lname" /><br />
+          </div>
+        </div>
         <label for="email">Email</label><br />
         <input type="email" name="email" required /><br />
-        <label for="age">Age</label><br />
-        <input type="number" name="age" required /><br />
+        <label for="email">Password</label><br />
+        <input type="password" name="password" required /><br />
+        <div class="grp">
+          <div class="grp3">
+            <label for="age">Age</label><br />
+            <input type="number" name="age" required /><br />
+          </div>
+          <div class="grp4">
+            <label for="mobile-no">Mobile No</label><br />
+            <input type="number" maxlength="10" name="mobile-no" required /><br />
+          </div>
+        </div>
         <div class="grp">
           <div class="grp2">
             <label for="gender">Gender</label><br />
             <select name="gender" id="">
-              <option value="A-">Male</option>
-              <option value="A+">Female</option>
-              <option value="B-">Transgender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">other</option>
             </select><br />
           </div>
           <div class="grp1">
@@ -134,8 +166,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select><br />
           </div>
         </div>
-        <label for="mobile-no">Mobile No</label><br />
-        <input type="number" name="mobile-no" required /><br />
         <label for="address">Address</label><br />
         <input type="text" name="address" required /><br />
         <p class="alert"><?php if (isset($alert)) {

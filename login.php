@@ -1,19 +1,25 @@
 <?php
-include 'random.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   include 'dbcon.php';
-  $ranDonor_id=randomUserId(6);
-  $user = $_POST['username'];
-  $user_pass = $_POST['password'];
+  $email = $_POST['email'];
+  $password = $_POST['passwo'];
   include 'dbcon.php';
-  $sql = "INSERT INTO `users` (`username`,`password`,`donor_id`) VALUES ('$user','$user_pass')";
-  // header('location : index.php');
+  $sql = "SELECT * FROM `users` WHERE`user_email`='$email' AND `user_pass`='$password'";
+  $result = mysqli_query($con, $sql);
+  $row = mysqli_num_rows($result);
+  if ($row == 1) {
+    session_start();
+    $_SESSION['logedin'] = true;
+    $_SESSION['email']=$email;
+    echo "<script type='text/javascript'>window.top.location='http://localhost/Blood%20Donation/';</script>";
+  }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+<link rel="shortcut icon" href="blood.png" type="image/x-icon">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
@@ -27,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       --black: #31393cff;
       --blue: #2176ffff;
     }
+
     * {
       margin: 0;
       font-family: "Poppins", sans-serif;
@@ -88,15 +95,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="form-input">
       <h1>Login</h1>
       <form action="login.php" method="POST">
-        <label for="name">Username</label><br />
-        <input type="text" name="username" required /><br />
-        <label for="password">Password</label> <br />
-        <input type="password" required name="pass" id="" /><br />
+        <label>Email</label><br />
+        <input type="email" name="email" required /><br />
+        <label>Password</label> <br />
+        <input type="password" name="passwo" required /><br />
         <button type="submit">Login</button>
       </form>
       <a href="register.php">Don't have account? Register Now</a>
     </div>
-    
+
   </div>
 </body>
 
