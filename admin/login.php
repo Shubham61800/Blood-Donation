@@ -1,20 +1,21 @@
 <?php
+include '../dbcon.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  include 'dbcon.php';
-  $email = $_POST['email'];
-  $password = $_POST['passwo'];
-  include 'dbcon.php';
-  $sql = "SELECT * FROM `users` WHERE`user_email`='$email' AND `user_pass`='$password'";
+
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+
+  $sql = "SELECT * FROM `admin` WHERE`username`='$username' AND `password`='$password'";
   $result = mysqli_query($con, $sql);
   $row = mysqli_num_rows($result);
+  $name=mysqli_fetch_assoc($result);
+  $admin_name=$name['admin_name'];
   if ($row == 1) {
-    $alert="";
     session_start();
-    $_SESSION['logedin'] = true;
-    $_SESSION['user_email'] = $email;
-    echo "<script type='text/javascript'>window.top.location='http://localhost/Blood%20Donation/';</script>";
-  } else {
-    $alert = "Wrong Credentials";
+    $_SESSION['admin_logedin'] = true;
+    $_SESSION['email'] = $email;
+    $_SESSION['admin_name']=$admin_name;
+    echo "<script type='text/javascript'>window.top.location='http://localhost/Blood%20Donation/admin/dashboard.php';</script>";
   }
 }
 ?>
@@ -90,11 +91,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       font-weight: 600;
       cursor: pointer;
     }
-
-    .warning {
-      color: red;
-      font-size: 1rem;
-    }
     img{
       height: 44rem;
     }
@@ -103,20 +99,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
   <div class="container">
-    <img src="images/illus-1.png" alt="">
+  <img src="../images/illus-1.png" alt="">
     <div class="form-input">
       <h1>Login</h1>
       <form action="login.php" method="POST">
         <label>Email</label><br />
-        <input type="email" name="email"/><br />
+        <input type="text" name="username" required /><br />
         <label>Password</label> <br />
-        <input type="password" name="passwo" /><br />
-        <p class="warning"><?php if (isset($alert)) {
-          echo $alert;
-        } ?></p>
+        <input type="password" name="password" required /><br />
         <button type="submit">Login</button>
+        
       </form>
-      <a href="register.php">Don't have account? Register Now</a>
     </div>
 
   </div>

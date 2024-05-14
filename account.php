@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <?php
 include 'dbcon.php';
+include 'components/navbar.php';
 session_start();
-$email = $_SESSION['email'];
+$email = $_SESSION['user_email'];
 $sql = "SELECT  * FROM `donors` WHERE `donor_email`='$email'";
 $result = mysqli_fetch_assoc(mysqli_query($con, $sql));
 $username = strtoupper($result['first_name'] . " " . $result['last_name']);
@@ -129,13 +130,22 @@ $username = strtoupper($result['first_name'] . " " . $result['last_name']);
             font-size: 1rem;
             color: lightcoral;
         }
+        .details{
+            display: grid;
+            grid-template-columns: max-content auto;
+        }
+        .details p{
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
 
         .list-donor {
             margin-top: 2rem;
             display: grid;
             grid-template-columns: auto auto auto auto;
             column-gap: 0;
-            
+
         }
 
         .list-donor p {
@@ -169,6 +179,7 @@ $username = strtoupper($result['first_name'] . " " . $result['last_name']);
 <body>
     <div class="main-container">
         <div class="sidebar">
+
             <div class="dt"><i class="fa-regular fa-user"></i><?php echo $username; ?></div>
             <a href="account.php?q=details">Your Details</a>
             <a href="account.php?q=activity">Activity</a>
@@ -176,16 +187,62 @@ $username = strtoupper($result['first_name'] . " " . $result['last_name']);
             <a href="logout.php">Logout<i class="fa-solid fa-right-from-bracket"></i></a>
         </div>
         <div class="center">
-            <h1>Your Requests</h1>
             <?php
             switch ($_GET['q']) {
                 case 'details':
-                    echo "details";
+                    echo `<h1>Your Details</h1>`;
+                    echo '<div class="details">';
+                    $sql = "SELECT * FROM donors WHERE donor_email='$email'";
+                    $row = mysqli_fetch_assoc(mysqli_query($con, $sql));
+                    $name = $row['first_name'] . ' ' . $row['last_name'];
+
+                    echo "<p>Name</p>
+                    <p>".$name."</p>
+                    <p>Email</p>
+                    <p>".$row['donor_email']."</p>
+                    <p>Blood Group</p>
+                    <p>".$row['blood_grp']."</p>
+                    <p>Mobile No</p>
+                    <p>".$row['mobile_no']."</p>
+                    <p>Age</p>
+                    <p>".$row['age']."</p>
+                    <p>Address</p>
+                    <p>".$row['address']."</p>
+                    <p>Gender</p>
+                    <p>".$row['gender']."</p>";
                     break;
                 case 'activity':
-                    echo "activity";
+                    echo "<h1>Your Activity</h1>";
+                    echo '<div class="list-donor">';
+                    $sql = "SELECT user_activity.donate_date,user_activity.status,donation_camp.camp_name from user_activity JOIN donation_camp ON user_activity.camp_id=donation_camp.camp_id AND user_activity.username='$email'";
+                    $result = mysqli_query($con, $sql);
+                    $num = mysqli_num_rows($result);
+
+                    echo '  <p>Sr</p>
+                            <p>Camp Name</p>
+                            <p>Date</p>
+                            <p>Status</p>';
+                    $i = 1;
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $status = $row['status'];
+                        if ($status == 1) {
+                            $text = "Appointment Booked";
+                            $class = "req";
+                        } else {
+                            $text = "Donation Completed";
+                            $class = "confirm";
+                        }
+                        echo "<p>$i</p>
+                        <p>" . $row['camp_name'] . "</p>
+                        <p>" . $row['donate_date'] . "</p>";
+                        echo '<p class="status ' . $class . '">' . $text . "</p></tr>";
+                        $i++;
+                    }
+                    echo "</div>";
                     break;
                 case 'request':
+                    echo "<h1>Your Requests</h1>";
+
                     echo '<div class="list-donor">';
                     $sql = "SELECT * FROM `blood_request` WHERE `req_email` = '$email'";
                     $result = mysqli_query($con, $sql);
@@ -197,7 +254,7 @@ $username = strtoupper($result['first_name'] . " " . $result['last_name']);
                             <p>Status</p>';
                     $i = 1;
                     while ($row = mysqli_fetch_assoc($result)) {
-                        $status=$row['status'];
+                        $status = $row['status'];
                         if ($status == 1) {
                             $text = "Requested";
                             $class = "req";
@@ -209,9 +266,9 @@ $username = strtoupper($result['first_name'] . " " . $result['last_name']);
                             $class = "reject";
                         }
                         echo "<p>$i</p>
-                <p>" . $row['blood_grp'] . "</p>
-                <p>" . $row['req_date'] . "</p>";
-                echo '<p class="status '.$class.'">' . $text . "</p></tr>";
+                        <p>" . $row['blood_grp'] . "</p>
+                        <p>" . $row['req_date'] . "</p>";
+                        echo '<p class="status ' . $class . '">' . $text . "</p></tr>";
                         $i++;
                     }
                     echo "</div>";

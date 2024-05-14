@@ -6,22 +6,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $lname = $_POST['lname'];
   $email = $_POST['email'];
   $password = $_POST['password'];
-  $age = $_POST['age'];
-  $bldgrp = $_POST['blood_grp'];
   $mobile = $_POST['mobile-no'];
-  $gender = $_POST['gender'];
-  $address = $_POST['address'];
-  $sql = "SELECT * FROM `users` WHERE `user_email`='$email'";
+  $sql = "SELECT * FROM `employees` WHERE `user_email`='$email'";
   $result = mysqli_query($con, $sql);
   if (mysqli_num_rows($result) == 0) {
     $sql = "INSERT INTO `users` (`user_email`,`user_pass`) VALUES ('$email','$password')";
     $result = mysqli_query($con, $sql);
-    $sql = "INSERT INTO `donors` (`donor_email`, `first_name`, `last_name`, `age`, `gender`, `blood_grp`, `mobile_no`, `address`, `donor_status`) VALUES ('$email', '$fname', '$lname', '$age', '$gender', '$bldgrp', '$mobile', '$address', '1')";
-    mysqli_query($con,$sql);
     session_start();
     $_SESSION['logedin'] = true;
-    $_SESSION['user_email']=$email;
-    echo "<script type='text/javascript'>window.top.location='http://localhost/Blood%20Donation/';</script>";
+    $_SESSION['email'] = $email;
+    echo "<script type='text/javascript'>window.top.location='http://localhost/Blood%20Donation/admin/dashboard.php';</script>";
   }
 }
 ?>
@@ -115,7 +109,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       font-size: 1rem;
       color: lightcoral;
     }
-    img{
+
+    img {
       height: 44rem;
     }
   </style>
@@ -123,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
   <div class="container">
-  <img src="images/illus-1.png" alt="">
+    <img src="../images/illus-1.png" alt="">
     <div class="form-input">
       <h1>Register Now</h1>
       <form action="register.php" method="POST">
@@ -163,15 +158,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="grp1">
             <label for="fname">Blood Group</label><br />
             <select name="blood_grp" id="">
-                <option value="all">---Select---</option>
-                <option value="A-">A-</option>
-                <option value="A+">A+</option>
-                <option value="B-">B-</option>
-                <option value="B+">B+</option>
-                <option value="AB-">AB-</option>
-                <option value="AB+">AB+</option>
-                <option value="O-">O-</option>
-                <option value="O+">O+</option>
+              <option value="A-">A-</option>
+              <option value="A+">A+</option>
+              <option value="B-">B-</option>
+              <option value="B+">B+</option>
             </select><br />
           </div>
         </div>

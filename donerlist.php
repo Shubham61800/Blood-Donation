@@ -138,12 +138,6 @@
             </select>
             <button id="apply" type="submit">Get</button>
         </form>
-        <?php
-        $logedin = $_SESSION['logedin'];
-        if (!isset($logedin)) {
-            echo `<a  id="req" href="register.php">Become A donor</a>`;
-        }
-        ?>
     </div>
 
     <div class="list-donor">

@@ -1,11 +1,13 @@
 <?php
+    
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         include 'dbcon.php';
         session_start();
-        $email=$_SESSION['email'];
+        error_reporting(0);
+        $email=$_SESSION['user_email'];
         $bldgrp=$_POST['blood_grp'];
         $mes=$_POST['mes'];
-        $current_date=date("Y/m/d");
+        $current_date=date("d/m/y");
         $sql="INSERT INTO `blood_request` (`req_email`, `blood_grp`, `mes`, `status`,`req_date`) VALUES ('$email', '$bldgrp', '$mes', '1', '$current_date');";
         mysqli_query($con,$sql);
     }
